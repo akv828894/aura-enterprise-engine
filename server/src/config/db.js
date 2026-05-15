@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 export const connectDatabase = async () => {
+  if (mongoose.connection.readyState === 1) {
+    return mongoose.connection;
+  }
+
   const mongoUri = process.env.MONGO_URI;
 
   if (!mongoUri) {
@@ -10,4 +14,6 @@ export const connectDatabase = async () => {
   mongoose.set("strictQuery", true);
   await mongoose.connect(mongoUri);
   console.log("MongoDB connected");
+
+  return mongoose.connection;
 };

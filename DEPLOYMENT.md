@@ -44,3 +44,13 @@ VITE_API_BASE_URL=<Render backend URL>/api
 <backend-url>/api/inventory?search=laptop&limit=5
 <backend-url>/api/analytics
 ```
+
+## Backend on Vercel Alternative
+
+The repository also includes a Vercel serverless backend entry at `api/index.js`.
+
+Environment variable:
+
+```txt
+MONGO_URI=<MongoDB Atlas connection string>
+```
