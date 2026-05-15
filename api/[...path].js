@@ -7,7 +7,9 @@ import { connectDatabase } from "../server/src/config/db.js";
 const handler = serverless(app);
 
 export default async function auraApi(req, res) {
-  if (req.url !== "/api/health") {
+  const isHealthCheck = req.url === "/api/health" || req.url === "/health";
+
+  if (!isHealthCheck) {
     await connectDatabase();
   }
 

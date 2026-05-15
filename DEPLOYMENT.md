@@ -47,7 +47,7 @@ VITE_API_BASE_URL=<Render backend URL>/api
 
 ## Backend on Vercel Alternative
 
-The repository also includes a Vercel serverless backend entry at `api/index.js`.
+The repository also includes a Vercel serverless backend entry at `api/[...path].js`.
 
 Environment variable:
 
