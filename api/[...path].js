@@ -1,10 +1,20 @@
 import "dotenv/config";
 import serverless from "serverless-http";
 
-import { app } from "../server/src/app.js";
-import { connectDatabase } from "../server/src/config/db.js";
+let cachedHandler;
+let cachedConnectDatabase;
 
-const handler = serverless(app);
+const loadServer = async () => {
+  if (!cachedHandler || !cachedConnectDatabase) {
+    const [{ app }, { connectDatabase }] = await Promise.all([
+      import("../server/src/app.js"),
+      import("../server/src/config/db.js"),
+    ]);
+
+    cachedHandler = serverless(app);
+    cachedConnectDatabase = connectDatabase;
+  }
+};
 
 export default async function auraApi(req, res) {
   const isHealthCheck = req.url === "/api/health" || req.url === "/health";
@@ -13,7 +23,8 @@ export default async function auraApi(req, res) {
     return res.status(200).json({ status: "ok", service: "Aura Engine API" });
   }
 
-  await connectDatabase();
+  await loadServer();
+  await cachedConnectDatabase();
 
-  return handler(req, res);
+  return cachedHandler(req, res);
 }
