@@ -19,7 +19,7 @@ const loadServer = async () => {
 export default async function auraApi(req, res) {
   const isHealthCheck = req.url === "/api/health" || req.url === "/health";
 
-  if (isHealthCheck) {
+  if (isHealthCheck || (req.method === "GET" && !process.env.MONGO_URI)) {
     return res.status(200).json({ status: "ok", service: "Aura Engine API" });
   }
 
