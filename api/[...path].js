@@ -1,5 +1,6 @@
 import "dotenv/config";
 import serverless from "serverless-http";
+import { handleFallbackApi } from "../server/src/demo/fallbackApi.js";
 
 let cachedHandler;
 let cachedConnectDatabase;
@@ -19,7 +20,11 @@ const loadServer = async () => {
 export default async function auraApi(req, res) {
   const isHealthCheck = req.url === "/api/health" || req.url === "/health";
 
-  if (isHealthCheck || (req.method === "GET" && !process.env.MONGO_URI)) {
+  if (!process.env.MONGO_URI) {
+    return handleFallbackApi(req, res);
+  }
+
+  if (isHealthCheck) {
     return res.status(200).json({ status: "ok", service: "Aura Engine API" });
   }
 
