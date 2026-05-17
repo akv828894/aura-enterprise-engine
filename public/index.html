@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aura Engine API</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f5f7fa;
+        color: #111827;
+      }
+
+      main {
+        max-width: 760px;
+        margin: 80px auto;
+        padding: 32px;
+        background: #ffffff;
+        border: 1px solid #d9e0ea;
+        border-radius: 8px;
+      }
+
+      h1 {
+        margin-top: 0;
+      }
+
+      a {
+        display: block;
+        margin: 12px 0;
+        color: #0f766e;
+        font-weight: 700;
+      }
+
+      code {
+        background: #eef2f6;
+        padding: 3px 6px;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Aura Engine API</h1>
+      <p>This is the backend API service. Use the frontend dashboard for the full app experience.</p>
+      <a href="/api/health">Health Check</a>
+      <a href="/api/inventory?page=1&limit=50">Inventory API</a>
+      <a href="/api/inventory/categories">Categories API</a>
+      <a href="/api/analytics">Analytics API</a>
+      <p>Frontend: <code>https://client-six-pink-95.vercel.app</code></p>
+    </main>
+  </body>
+</html>
